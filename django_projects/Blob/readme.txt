@@ -1,3 +1,8 @@
+prerequisites:
+	Python 3.x
+	Django installed
+	MySQL server 8.x.x
+
 Steps to start the blob server:
 	
 Step 1: Activate the virtual environment:
