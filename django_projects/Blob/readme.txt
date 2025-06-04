@@ -3,13 +3,23 @@ prerequisites:
 	Django installed
 	MySQL server 8.x.x
 
+Credentials:
+	Admin User:
+		Email: root@gmail.com
+		Username: root
+		Password: Root@123
+
+configurations:
+	DB configurations at "\python\django_projects\Blob\myapp\settings.py"
+	
+
 Steps to start the blob server:
 	
 Step 1: Activate the virtual environment:
 	Execute the "\python\django_projects\Blob\env\Scripts\activate" file to activate the virtual environment.
 
 Step 2. Start the server:
-	Navigate to "C:\Project\dhinesh\gitspace\python\django_projects\Blob\myapp".
+	Navigate to "\python\django_projects\Blob\myapp".
 	Execute the below command:
 		python manage.py runserver
 

@@ -2,9 +2,10 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.urls import reverse
 import logging
-from .models import Post
+from .models import Post, AboutUS
 from django.http import Http404
 from django.core.paginator import Paginator
+from .forms import ContactForm
 
 #posts = [
 #        {'id':1, 'title': 'post 1', 'content': 'Content of Post 1'},
@@ -44,3 +45,32 @@ def old_url_redirect(request):
 
 def new_url_view(request):
     return HttpResponse("This is the new url")
+
+def contact_view(request): 
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+        logger = logging.getLogger("Testing")
+        if form.is_valid():
+            logger.debug(f'POST data is {form.cleaned_data['name']} {form.cleaned_data['email']} {form.cleaned_data['message']}')
+           
+            #sent email or save in database
+            success_message = "Your Email has been sent!"
+            return render(request, 'blog/contact.html', {'form':form, 'success_message': success_message})
+
+        else:
+            logger.debug('Form Validation failed')
+        return render(request, 'blog/contact.html', {'form':form, 'name': name, 'email': email, 'message': message})
+
+    
+    
+    return render(request, 'blog\contact.html')
+
+def about_view(request):
+    about_content = AboutUS.objects.first().content
+    return render(request, 'blog/about.html', {'about_content':about_content})
+
+
+
